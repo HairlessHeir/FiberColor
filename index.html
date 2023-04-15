@@ -1,22 +1,90 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+
+<head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="./assets/avatar.png" />
-    <meta name = "viewport" content = "width=device-width, minimum-scale=1.0, maximum-scale = 1.0, user-scalable = no">
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale = 1.0, user-scalable = no">
     <title>Fiber Color Checker</title>
-    <link rel="stylesheet" href="./css/style.css" />
-  </head>
-  <body>
+
+
+    <script type="text/javascript">
+        function getColorForID(wireId)
+        {   
+            var dict = {};
+            dict[0] = "#FF0000";
+            dict[1] = "#00B050";
+            dict[2] = "#305496";
+            dict[3] = "#FFFF00";
+            dict[4] = "#FFFFFF";
+            dict[5] = "#BFBFBF";
+            dict[6] = "#843C0C";
+            dict[7] = "#7030A0";
+            dict[8] = "#00FFFF";
+            dict[9] = "#0D0D0D";
+            dict[10] = "#FFC000";
+            dict[11] = "#FF339A";
+            return dict[(wireId-1) % 12];
+        }
+        function getPackColorForID(wireId, isMiddle)
+        {   
+            var dict = {};
+            dict[0] = "#FF0000";
+            dict[1] = "#00B050";
+            dict[2] = "#305496";
+            dict[3] = "#FFFF00";
+            dict[4] = "#FFFFFF";
+            dict[5] = "#BFBFBF";
+            dict[6] = "#843C0C";
+            dict[7] = "#7030A0";
+            dict[8] = "#00FFFF";
+            dict[9] = "#0D0D0D";
+            dict[10] = "#FFC000";
+            dict[11] = "#FF339A";
+            if(isMiddle)
+            {
+                return dict[2];
+            }
+            else return dict[Math.floor((wireId-1)/12) % 12];
+        }
+        function getWireColor(wireNum) {
+            return "<div style=\"background-color:"+getColorForID(wireNum)+"; width:300px; height:20px\">" + wireNum + "</div>";
+        }
+        function getPackColor(wireNum, isMiddle) {
+            return "<div style=\"background-color:"+getPackColorForID(wireNum, isMiddle)+"; width:300px; height:20px\"></div>";
+        }
+    </script>
+</head>
+
+<body>
     <div>
         <h3>Fiber Color Checker</h3>
     </div>
     <div>
-        <label> WIRE NUMBER: </label>
-        <button onclick="getElementById('wire').innerHTML.style.color = '#d00'">
-        Show Color
-        </button>
-        <p id="wire"></p>
+        <div>
+            <input type="number" id="wireNum" name="wireNum" value = 0>
+            <button onclick="getElementById('wire').innerHTML = getWireColor(wireNum.value); 
+                             getElementById('pack1').innerHTML = getPackColor(wireNum.value, false); 
+                             getElementById('pack2').innerHTML = getPackColor(wireNum.value, true); 
+                             getElementById('pack3').innerHTML = getPackColor(wireNum.value, false);">
+                Show Color
+            </button>
+        </div>
+        
+        <div>
+            <label> PACK: </label>
+            <div style="border:1px solid black; width:300px;">
+            <div id="pack1" style="background-color:white; width:300px; height:20px"></div>
+            <div id="pack2" style="background-color:white; width:300px; height:20px"></div>
+            <div id="pack3" style="background-color:white; width:300px; height:20px"></div>
+        </div>
+        </div>
+        
+        <div>
+            <label> WIRE: </label>
+            <div id="wire" style="border:1px solid black; background-color:white; width:300px; height:20px"></div>
+        </div>
+        
     </div>
-  </body>
+</body>
+
 </html>
