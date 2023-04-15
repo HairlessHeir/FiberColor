@@ -42,15 +42,17 @@
             dict[11] = "#FF339A";
             if(isMiddle)
             {
-                return dict[2];
+                if((Math.floor((wireId-1)/144)) % 2 == 1)
+                    return dict[9];
             }
-            else return dict[Math.floor((wireId-1)/12) % 12];
+            
+            return dict[Math.floor((wireId-1)/12) % 12];
         }
         function getWireColor(wireNum) {
             return "<div style=\"background-color:"+getColorForID(wireNum)+"; width:300px; height:20px\">" + wireNum + "</div>";
         }
         function getPackColor(wireNum, isMiddle) {
-            return "<div style=\"background-color:"+getPackColorForID(wireNum, isMiddle)+"; width:300px; height:20px\"></div>";
+            return "<div style=\"background-color:"+getPackColorForID(wireNum, isMiddle)+"; width:300px; height:30px\"></div>";
         }
     </script>
 </head>
@@ -73,9 +75,9 @@
         <div>
             <label> PACK: </label>
             <div style="border:1px solid black; width:300px;">
-            <div id="pack1" style="background-color:white; width:300px; height:20px"></div>
-            <div id="pack2" style="background-color:white; width:300px; height:20px"></div>
-            <div id="pack3" style="background-color:white; width:300px; height:20px"></div>
+            <div id="pack1" style="background-color:white; width:300px; height:30px"></div>
+            <div id="pack2" style="background-color:white; width:300px; height:30px"></div>
+            <div id="pack3" style="background-color:white; width:300px; height:30px"></div>
         </div>
         </div>
         
